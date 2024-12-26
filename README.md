@@ -147,41 +147,7 @@ It covers 5 major features:
     Then the predicted labels should match the expected labels with at least 50% accuracy```
 
    
-### 2. **Create step definitions in the `steps/` directory:**
 
-
-   ```// Load the pre-trained image classification model
-      Given('a pre-trained image classification model is loaded', async () => {
-        model = await loadImageClassificationModel();
-      });
-
-   // Input a set of known images and make predictions
-   When('I input a set of known images', async () => {
-     predictions = [];
-     for (const { image } of EXPECTED_LABELS) {
-       const imagePath = path.join(KNOWN_IMAGES_DIR, image);
-       const label = await predictImageLabel(model, imagePath);
-       predictions.push({ image, label });
-     }
-   });
-
-   // Check if the predicted labels match the expected labels with a certain accuracy
-   Then(
-     'the predicted labels should match the expected labels with at least {int}% accuracy',
-     (accuracyThreshold: number) => {
-       let correctPredictions = 0;
-       for (const { image, label } of predictions) {
-         const expectedLabel = EXPECTED_LABELS.find(
-           (el) => el.image === image,
-         )?.label;
-         if (expectedLabel && expectedLabel === label) {
-           correctPredictions++;
-         }
-       }
-       const accuracy = (correctPredictions / EXPECTED_LABELS.length) * 100;
-       expect(accuracy).toBeGreaterThanOrEqual(accuracyThreshold);
-     },
-   );```
 ## Troubleshooting
 
 - **Error: `npx playwright install` fails.**  
