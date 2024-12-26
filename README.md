@@ -135,8 +135,7 @@ It covers 5 major features:
 
 1. **Create a feature file in the `features/` directory:**
 
-   ```gherkin
-  @ValidateConsistentImageLabeling
+ ```@ValidateConsistentImageLabeling
    Feature: Validate Consistent Image Labeling
      As an Engineer
      I want to be able to validate consistent labeling of images
@@ -145,9 +144,9 @@ It covers 5 major features:
    Scenario: Validate consistent labeling for a set of known images
     Given a pre-trained image classification model is loaded
     When I input a set of known images
-    Then the predicted labels should match the expected labels with at least 50% accuracy
+    Then the predicted labels should match the expected labels with at least 50% accuracy```
 
-   ```
+   
 
 2. **Create step definitions in the `steps/` directory:**
 
