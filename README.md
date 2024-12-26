@@ -136,28 +136,54 @@ It covers 5 major features:
 1. **Create a feature file in the `features/` directory:**
 
    ```gherkin
-   @exampleFeature
-   Feature: Example feature
+  @ValidateConsistentImageLabeling
+   Feature: Validate Consistent Image Labeling
+     As an Engineer
+     I want to be able to validate consistent labeling of images
+     So I can ensure the model is accurate
 
-     Scenario: Example scenario
-       Given I open the homepage
-       Then I should see the title "Example Domain"
+   Scenario: Validate consistent labeling for a set of known images
+    Given a pre-trained image classification model is loaded
+    When I input a set of known images
+    Then the predicted labels should match the expected labels with at least 50% accuracy
+
    ```
 
 2. **Create step definitions in the `steps/` directory:**
 
-   ```typescript
-   import { Given, Then } from 'cucumber';
-   import { expect } from '@playwright/test';
+   ```
+  // Load the pre-trained image classification model
+      Given('a pre-trained image classification model is loaded', async () => {
+        model = await loadImageClassificationModel();
+      });
 
-   Given('I open the homepage', async function () {
-     await page.goto('https://example.com');
+   // Input a set of known images and make predictions
+   When('I input a set of known images', async () => {
+     predictions = [];
+     for (const { image } of EXPECTED_LABELS) {
+       const imagePath = path.join(KNOWN_IMAGES_DIR, image);
+       const label = await predictImageLabel(model, imagePath);
+       predictions.push({ image, label });
+     }
    });
 
-   Then('I should see the title {string}', async function (title) {
-     const pageTitle = await page.title();
-     expect(pageTitle).toBe(title);
-   });
+   // Check if the predicted labels match the expected labels with a certain accuracy
+   Then(
+     'the predicted labels should match the expected labels with at least {int}% accuracy',
+     (accuracyThreshold: number) => {
+       let correctPredictions = 0;
+       for (const { image, label } of predictions) {
+         const expectedLabel = EXPECTED_LABELS.find(
+           (el) => el.image === image,
+         )?.label;
+         if (expectedLabel && expectedLabel === label) {
+           correctPredictions++;
+         }
+       }
+       const accuracy = (correctPredictions / EXPECTED_LABELS.length) * 100;
+       expect(accuracy).toBeGreaterThanOrEqual(accuracyThreshold);
+     },
+   );
    ```
 ## Troubleshooting
 
