@@ -147,8 +147,8 @@ It covers 5 major features:
     Then the predicted labels should match the expected labels with at least 50% accuracy```
 
    
+### 2. **Create step definitions in the `steps/` directory:**
 
-2. **Create step definitions in the `steps/` directory:**
 
    ```// Load the pre-trained image classification model
       Given('a pre-trained image classification model is loaded', async () => {
