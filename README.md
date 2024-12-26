@@ -195,9 +195,6 @@ It covers 5 major features:
   npm install
   ```
 
-## Contributing
-
-Contributions are welcome! Please follow the [Contributing Guidelines](CONTRIBUTING.md) for submitting issues and pull requests.
 
 ## License
 
