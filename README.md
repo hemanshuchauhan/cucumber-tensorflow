@@ -150,8 +150,7 @@ It covers 5 major features:
 
 2. **Create step definitions in the `steps/` directory:**
 
-   ```
-  // Load the pre-trained image classification model
+   ```// Load the pre-trained image classification model
       Given('a pre-trained image classification model is loaded', async () => {
         model = await loadImageClassificationModel();
       });
@@ -182,8 +181,7 @@ It covers 5 major features:
        const accuracy = (correctPredictions / EXPECTED_LABELS.length) * 100;
        expect(accuracy).toBeGreaterThanOrEqual(accuracyThreshold);
      },
-   );
-   ```
+   );```
 ## Troubleshooting
 
 - **Error: `npx playwright install` fails.**  
