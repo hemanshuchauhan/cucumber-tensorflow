@@ -1,0 +1,7 @@
+.DS_Store
+node_modules/
+reports/
+artifacts/
+allure-report/
+src/support/model/pretrained-model/weights.bin
+src/support/pretrained-model/model.json
